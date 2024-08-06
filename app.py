@@ -2,12 +2,8 @@ from flask import Flask, request, jsonify
 import pytesseract
 from PIL import Image
 import io
-import openai
 
 app = Flask(__name__)
-
-# Set your OpenAI API key
-openai.api_key = 'K89147936588957'
 
 @app.route('/ocr', methods=['POST'])
 def ocr():
@@ -21,18 +17,7 @@ def ocr():
     try:
         image = Image.open(io.BytesIO(file.read()))
         text = pytesseract.image_to_string(image)
-        
-        # Use OpenAI to process the OCR text
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # or another model you have access to
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": text}
-            ]
-        )
-        chat_response = response.choices[0].message['content']
-        
-        return jsonify({'text': text, 'openai_response': chat_response})
+        return jsonify({'text': text})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

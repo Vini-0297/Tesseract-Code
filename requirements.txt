@@ -1,4 +1,3 @@
-Flask
-pytesseract
-Pillow
-openai
+Flask==2.0.3
+pytesseract==0.3.10
+Pillow==8.4.0
