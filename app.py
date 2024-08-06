@@ -15,10 +15,16 @@ def ocr():
         return jsonify({'error': 'No selected file'}), 400
 
     try:
+        # Debug logging
+        print(f"Received file: {file.filename}, Type: {file.mimetype}, Size: {len(file.read())} bytes")
+        file.seek(0)  # Reset file pointer after reading size
+
         image = Image.open(io.BytesIO(file.read()))
         text = pytesseract.image_to_string(image)
         return jsonify({'text': text})
     except Exception as e:
+        # Debug logging
+        print(f"Error processing image: {e}")
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
