@@ -10,7 +10,7 @@ COPY . /app
 # Install Tesseract OCR and required dependencies
 RUN apt-get update && \
     apt-get install -y tesseract-ocr libtesseract-dev && \
-    pip install --no-cache-dir -r requirement.txt
+    pip install --no-cache-dir -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
