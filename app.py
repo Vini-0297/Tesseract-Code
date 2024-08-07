@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 import pytesseract
 from PIL import Image
 import io
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/ocr', methods=['POST'])
 def ocr():
@@ -23,5 +25,3 @@ def ocr():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
-
-    
